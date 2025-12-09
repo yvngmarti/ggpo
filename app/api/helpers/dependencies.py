@@ -1,6 +1,11 @@
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.api.services import RoleService, TransactionTypeService, PaymentStatusService
+from app.api.services import (
+    RoleService,
+    TransactionTypeService,
+    PaymentStatusService,
+    ExpenseStatusService,
+)
 from fastapi import Depends
 
 
@@ -14,3 +19,7 @@ def get_transaction_type_service(db: Session = Depends(get_db)):
 
 def get_payment_status_service(db: Session = Depends(get_db)):
     return PaymentStatusService(db)
+
+
+def get_expense_status_service(db: Session = Depends(get_db)):
+    return ExpenseStatusService(db)

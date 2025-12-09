@@ -1,7 +1,8 @@
 from fastapi import FastAPI, APIRouter
-from app.api.routers import roles
+from app.api.routers import expense_statements
+from app.api.routers import payment_statements
 from app.api.routers import transaction_types
-from app.api.routers import payment_status
+from app.api.routers import roles
 from .utils import constants
 
 # from src.core.middlewares import setup_middlewares
@@ -15,9 +16,10 @@ app = FastAPI(
 
 api_router = APIRouter(prefix=constants.API_PREFIX)
 
-api_router.include_router(roles.router)
+api_router.include_router(expense_statements.router)
+api_router.include_router(payment_statements.router)
 api_router.include_router(transaction_types.router)
-api_router.include_router(payment_status.router)
+api_router.include_router(roles.router)
 
 app.include_router(api_router)
 

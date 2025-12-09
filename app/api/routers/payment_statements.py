@@ -18,7 +18,7 @@ def get_payment_statements(
     message = (
         "Payment statements retrieved successfully"
         if data
-        else "No payment statements types found"
+        else "No payment statements found"
     )
     return APIResponse(status=True, message=message, data=data)
 
