@@ -1,45 +1,54 @@
 from sqlalchemy.orm import Session
 from app.models import Role
+from app.api.repositories.role_repository import RoleRepository
 from app.api.schemas.role_schema import CreateRoleSchema, UpdateRoleSchema
 
 
-def get_roles(db: Session):
-    return db.query(Role).all()
+class RoleService:
+    def __init__(self, db: Session):
+        self.db = db
+        self.repository = RoleRepository()
 
+    def get_all_roles(self):
+        return self.repository.get_all(self.db)
 
-def get_role_by_id(db: Session, role_id: int):
-    return db.query(Role).filter(Role.id == role_id).first()
+    def get_role_by_id(self, role_id: int):
+        return self.repository.get_by_id(self.db, role_id)
 
+    def get_role_by_name(self, role_name: str):
+        return self.repository.get_by_name(self.db, role_name)
 
-def get_role_by_name(db: Session, role_name: str):
-    return db.query(Role).filter(Role.name == role_name).first()
+    def create_role(self, create_schema: CreateRoleSchema):
+        name_upper = create_schema.name.upper()
+        if self.repository.get_by_name(self.db, name_upper):
+            return False, "Role name already registered", None
 
+        new_role = Role(name=name_upper, description=create_schema.description)
+        created_role = self.repository.create(self.db, new_role)
+        return True, "Role created successfully", created_role
 
-def create_role(db: Session, create_role_schema: CreateRoleSchema):
-    db_role = Role(
-        name=create_role_schema.name,
-        description=create_role_schema.description,
-    )
-    db.add(db_role)
-    db.commit()
-    db.refresh(db_role)
-    return db_role
+    def update_role(self, role_id: int, update_schema: UpdateRoleSchema):
+        existing_role = self.repository.get_by_id(self.db, role_id)
+        if not existing_role:
+            return False, "Role not found", None
 
+        if update_schema.name:
+            name_upper = update_schema.name.upper()
+            existing_name = self.repository.get_by_name(self.db, name_upper)
+            if existing_name and existing_name.id != role_id:
+                return False, "Role name already registered", None
 
-def update_role(db: Session, role_id: int, update_role_schema: UpdateRoleSchema):
-    db_role = db.query(Role).filter(Role.id == role_id).first()
+        update_data = update_schema.model_dump(exclude_unset=True)
+        for field, value in update_data.items():
+            setattr(existing_role, field, value)
 
-    update_data = update_role_schema.model_dump(exclude_unset=True)
-    for field, value in update_data.items():
-        setattr(db_role, field, value)
+        updated_role = self.repository.update(self.db, existing_role)
+        return True, "Role updated successfully", updated_role
 
-    db.commit()
-    db.refresh(db_role)
-    return db_role
+    def delete_role(self, role_id: int):
+        existing_role = self.repository.get_by_id(self.db, role_id)
+        if not existing_role:
+            return False, "Role not found", None
 
-
-def delete_role(db: Session, role_id: int):
-    db_role = db.query(Role).filter(Role.id == role_id).first()
-    db.delete(db_role)
-    db.commit()
-    return db_role
+        deleted_role = self.repository.delete(self.db, existing_role)
+        return True, "Role deleted successfully", deleted_role
