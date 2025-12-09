@@ -49,7 +49,7 @@ class Provider(Base, TimestampMixin):
     __tablename__ = "providers"
     id = Column(Integer, primary_key=True, index=True)
     social_reason = Column(String)
-    rfc = Column(String)
+    rfc = Column(String, unique=True)
     address = Column(String)
 
     expenses = relationship("Expense", back_populates="provider")

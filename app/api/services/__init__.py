@@ -4,6 +4,7 @@ from .payment_status_service import PaymentStatusService
 from .expense_status_service import ExpenseStatusService
 from .project_service import ProjectService
 from .bank_account_service import BankAccountService
+from .provider_service import ProviderService
 
 __all__ = [
     "RoleService",
@@ -12,4 +13,5 @@ __all__ = [
     "ExpenseStatusService",
     "ProjectService",
     "BankAccountService",
+    "ProviderService",
 ]
