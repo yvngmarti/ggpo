@@ -15,7 +15,9 @@ class User(Base, TimestampMixin):
     role_id = Column(
         Integer, ForeignKey("roles.id", ondelete="RESTRICT"), nullable=False
     )
+
     role = relationship("Role", back_populates="users")
+
     created_expenses = relationship(
         "Expense", back_populates="created_by", foreign_keys="Expense.created_by_id"
     )
