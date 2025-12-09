@@ -40,13 +40,16 @@ class TransactionTypeService:
         if not existing_transaction_type:
             return False, "Transaction type not found", None
 
-        if update_schema.name:
-            name_upper = update_schema.name.upper()
+        update_data = update_schema.model_dump(exclude_unset=True)
+
+        if "name" in update_data:
+            name_upper = update_data["name"].upper()
+            update_data["name"] = name_upper
+
             existing_name = self.repository.get_by_name(self.db, name_upper)
             if existing_name and existing_name.id != transaction_type_id:
                 return False, "Transaction type name already registered", None
 
-        update_data = update_schema.model_dump(exclude_unset=True)
         for field, value in update_data.items():
             setattr(existing_transaction_type, field, value)
 
