@@ -1,8 +1,12 @@
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.api.services.role_service import RoleService
+from app.api.services import RoleService, TransactionTypeService
 from fastapi import Depends
 
 
-def get_role_service(db: Session = Depends(get_db)) -> RoleService:
+def get_role_service(db: Session = Depends(get_db)):
     return RoleService(db)
+
+
+def get_transaction_type_service(db: Session = Depends(get_db)):
+    return TransactionTypeService(db)

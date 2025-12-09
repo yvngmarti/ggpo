@@ -16,7 +16,8 @@ class RoleService:
         return self.repository.get_by_id(self.db, role_id)
 
     def get_role_by_name(self, role_name: str):
-        return self.repository.get_by_name(self.db, role_name)
+        name_upper = role_name.upper()
+        return self.repository.get_by_name(self.db, name_upper)
 
     def create_role(self, create_schema: CreateRoleSchema):
         name_upper = create_schema.name.upper()

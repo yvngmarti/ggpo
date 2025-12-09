@@ -1,5 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from app.api.routers import roles
+from app.api.routers import transaction_types
 from .utils import constants
 
 # from src.core.middlewares import setup_middlewares
@@ -14,7 +15,7 @@ app = FastAPI(
 api_router = APIRouter(prefix=constants.API_PREFIX)
 
 api_router.include_router(roles.router)
-# api_router.include_router(requirement_types.router)
+api_router.include_router(transaction_types.router)
 # api_router.include_router(requirements.router)
 # api_router.include_router(service_requests.router)
 # api_router.include_router(report_views.router)
