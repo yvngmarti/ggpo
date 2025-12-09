@@ -38,7 +38,8 @@ class Project(Base, TimestampMixin):
     __tablename__ = "projects"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    code = Column(String)
+    description = Column(String)
+    code = Column(String, unique=True)
     budget = Column(Float)
 
     expenses = relationship("Expense", back_populates="project")
@@ -73,15 +74,13 @@ class Expense(Base, TimestampMixin):
     description = Column(String)
     total_amount = Column(Float)
     invoice_date = Column(Date)
-    evidence_url = Column(String, nullable=True)
-    rejection_reason = Column(Text, nullable=True)
+    evidence_url = Column(String)
+    rejection_reason = Column(Text)
 
     created_by_id = Column(
         Integer, ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
-    approved_by_id = Column(
-        Integer, ForeignKey("users.id", ondelete="RESTRICT"), nullable=True
-    )
+    approved_by_id = Column(Integer, ForeignKey("users.id", ondelete="RESTRICT"))
     project_id = Column(
         Integer, ForeignKey("projects.id", ondelete="RESTRICT"), nullable=False
     )
@@ -109,7 +108,7 @@ class Payment(Base, TimestampMixin):
     __tablename__ = "payments"
     id = Column(Integer, primary_key=True, index=True)
     amount = Column(Float)
-    payment_date = Column(Date, nullable=True)
+    payment_date = Column(Date)
 
     expense_id = Column(
         Integer,
@@ -123,9 +122,7 @@ class Payment(Base, TimestampMixin):
     created_by_id = Column(
         Integer, ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
-    processed_by_id = Column(
-        Integer, ForeignKey("users.id", ondelete="RESTRICT"), nullable=True
-    )
+    processed_by_id = Column(Integer, ForeignKey("users.id", ondelete="RESTRICT"))
 
     expense = relationship("Expense", back_populates="payment", uselist=False)
     status = relationship("PaymentStatus", back_populates="payments")
@@ -156,7 +153,6 @@ class BankTransaction(Base, TimestampMixin):
     payment_id = Column(
         Integer,
         ForeignKey("payments.id", ondelete="RESTRICT"),
-        nullable=True,
         unique=True,
     )
 

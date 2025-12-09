@@ -8,7 +8,7 @@ class Role(Base, TimestampMixin):
     __tablename__ = "roles"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
-    description = Column(String, nullable=True)
+    description = Column(String)
 
     users = relationship("User", back_populates="role")
 

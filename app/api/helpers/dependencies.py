@@ -5,6 +5,7 @@ from app.api.services import (
     TransactionTypeService,
     PaymentStatusService,
     ExpenseStatusService,
+    ProjectService,
 )
 from fastapi import Depends
 
@@ -23,3 +24,7 @@ def get_payment_status_service(db: Session = Depends(get_db)):
 
 def get_expense_status_service(db: Session = Depends(get_db)):
     return ExpenseStatusService(db)
+
+
+def get_project_service(db: Session = Depends(get_db)):
+    return ProjectService(db)
