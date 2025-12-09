@@ -1,6 +1,6 @@
 class Constants:
-    PROJECT_NAME: str = "AYS API"
-    PROJECT_VERSION: str = "0.0.1"
+    PROJECT_NAME: str = "API Gestión de Gastos y Pagos de Obras (GGPO)"
+    PROJECT_VERSION: str = "0.4.0"
     API_PREFIX: str = "/api/v1"
 
 
