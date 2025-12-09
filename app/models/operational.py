@@ -59,7 +59,7 @@ class BankAccount(Base):
     __tablename__ = "bank_accounts"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    account_number = Column(String)
+    account_number = Column(String, unique=True)
     balance = Column(Float, default=0.0)
 
     bank_transactions = relationship(

@@ -5,6 +5,7 @@ from .dependencies import (
     get_payment_status_service,
     get_expense_status_service,
     get_project_service,
+    get_bank_account_service,
 )
 
 __all__ = [
@@ -14,4 +15,5 @@ __all__ = [
     "get_payment_status_service",
     "get_expense_status_service",
     "get_project_service",
+    "get_bank_account_service",
 ]
