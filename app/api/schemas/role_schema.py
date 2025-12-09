@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
 
 
@@ -14,3 +13,14 @@ class CreateRoleSchema(RoleBase):
 
 class UpdateRoleSchema(RoleBase):
     pass
+
+
+class RoleResponseSchema(RoleBase):
+    id: int
+    name: str
+    description: str
+    created_at: datetime = None
+    updated_at: datetime = None
+
+    class Config:
+        from_attributes = True

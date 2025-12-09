@@ -1,0 +1,11 @@
+from typing import Any, Optional
+from pydantic import BaseModel
+
+
+class APIResponse(BaseModel):
+    status: bool
+    message: str
+    data: Optional[Any] = None
+
+    class Config:
+        from_attributes = True
