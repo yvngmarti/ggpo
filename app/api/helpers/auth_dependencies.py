@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from app.utils.constants import constants
 from app.core.config import settings
 from app.core.database import get_db
-from app.api.schemas.auth_schema import TokenPayload
 from app.api.repositories.user_repository import UserRepository
 from app.models import User
 
@@ -30,8 +29,6 @@ def get_current_user(
 
         if user_id is None or token_type != "access":
             raise credentials_exception
-
-        token_data = TokenPayload(**payload)
     except JWTError as exc:
         raise credentials_exception from exc
 

@@ -9,10 +9,10 @@ from app.core.config import settings
 class AuthService:
     def __init__(self, db: Session):
         self.db = db
-        self.user_repo = UserRepository()
+        self.user_repository = UserRepository()
 
     def authenticate_user(self, email: str, password: str):
-        user = self.user_repo.get_by_email(self.db, email)
+        user = self.user_repository.get_by_email(self.db, email)
         if not user:
             return None
         if not SecurityUtils.verify_password(password, user.password):
@@ -28,7 +28,10 @@ class AuthService:
             token_type = payload.get("type")
 
             if not user_id or token_type != "refresh":
-                raise HTTPException(status_code=401, detail="Invalid refresh token")
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Invalid refresh token",
+                )
 
             access_token = SecurityUtils.create_access_token(subject=user_id)
             return access_token
