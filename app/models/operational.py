@@ -9,8 +9,8 @@ class User(Base, TimestampMixin):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     last_name = Column(String)
-    email = Column(String, unique=True, index=True)
-    password = Column(String)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password = Column(String, nullable=False)
 
     role_id = Column(
         Integer, ForeignKey("roles.id", ondelete="RESTRICT"), nullable=False

@@ -14,7 +14,7 @@ class CreateRoleSchema(RoleBase):
 
 class UpdateRoleSchema(BaseModel):
     name: Optional[str] = None
-    description: Optional[bool] = None
+    description: Optional[str] = None
 
 
 class RoleResponseSchema(RoleBase):
@@ -24,5 +24,10 @@ class RoleResponseSchema(RoleBase):
     created_at: datetime = None
     updated_at: datetime = None
 
+    class Config:
+        from_attributes = True
+
+
+class RoleSimpleResponseSchema(RoleBase):
     class Config:
         from_attributes = True
