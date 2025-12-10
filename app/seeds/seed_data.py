@@ -2,7 +2,7 @@ ROLES = [
     {"name": "EMPLOYEE", "description": "Records expenses"},
     {"name": "DIRECTOR", "description": "Approves expenses and payments"},
     {"name": "TREASURER", "description": "Executes payments"},
-    {"name": "GENERIC_USER", "description": "Read-only"},
+    {"name": "GENERIC USER", "description": "Read-only"},
 ]
 
 TRANSACTION_TYPES = [

@@ -1,7 +1,12 @@
 from fastapi import APIRouter, Depends
 from app.api.services import ExpenseService
 from app.api.schemas import expense_schema
-from app.api.helpers import APIResponse, get_expense_service, get_current_user
+from app.api.helpers import (
+    APIResponse,
+    get_expense_service,
+    RoleChecker,
+)
+from app.utils import constants
 from app.models import User
 
 router = APIRouter(prefix="/expenses", tags=["Expenses"])
@@ -33,7 +38,7 @@ def get_expense_by_id(
 def create_expense(
     create_schema: expense_schema.CreateExpenseSchema,
     service: ExpenseService = Depends(get_expense_service),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(RoleChecker([constants.ROLE_ENGINEER])),
 ):
     success, message, expense = service.create_expense(create_schema, current_user)
 
@@ -64,7 +69,7 @@ def review_expense(
     expense_id: int,
     review_schema: expense_schema.ReviewExpenseSchema,
     service: ExpenseService = Depends(get_expense_service),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(RoleChecker([constants.ROLE_DIRECTOR])),
 ):
     success, message, expense = service.review_expense(
         expense_id, review_schema, current_user

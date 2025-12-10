@@ -11,10 +11,11 @@ from .dependencies import (
     get_user_service,
     get_expense_service,
 )
-from .auth_dependencies import get_current_user
+from .auth_dependencies import get_current_user, RoleChecker
 
 __all__ = [
     "APIResponse",
+    "RoleChecker",
     "get_auth_service",
     "get_current_user",
     "get_role_service",

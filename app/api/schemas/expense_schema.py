@@ -1,6 +1,6 @@
-from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from datetime import date, datetime
+from pydantic import BaseModel, Field, field_validator
 from app.api.schemas.expense_status_schema import ExpenseSimpleResponseSchema
 from app.api.schemas.project_schema import ProjectSimpleResponseSchema
 from app.api.schemas.provider_schema import ProviderSimpleResponseSchema
@@ -46,7 +46,7 @@ class UpdateExpenseSchema(BaseModel):
 class ReviewExpenseSchema(BaseModel):
     action: str = Field(
         ...,
-        pattern=f"^({constants.ACTION_APPROVE}|{constants.ACTION_REJECT})$",
+        pattern=f"^({constants.EXPENSE_ACTION_APPROVE}|{constants.EXPENSE_ACTION_REJECT})$",
         description="APPROVE or REJECT",
     )
     rejection_reason: Optional[str] = None
