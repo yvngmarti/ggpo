@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from datetime import datetime
 
@@ -8,6 +8,13 @@ class ProjectBase(BaseModel):
     description: str
     code: str
     budget: float = Field(..., gt=0, description="Budget must be greater than 0")
+
+    @field_validator("name", "description", "code", mode="before")
+    @classmethod
+    def strip_whitespace(cls, v):
+        if isinstance(v, str):
+            return v.strip()
+        return v
 
 
 class CreateProjectSchema(ProjectBase):
@@ -19,6 +26,13 @@ class UpdateProjectSchema(BaseModel):
     description: Optional[str] = None
     code: Optional[str] = None
     budget: Optional[float] = Field(None, gt=0)
+
+    @field_validator("name", "description", "code", mode="before")
+    @classmethod
+    def strip_whitespace(cls, v):
+        if isinstance(v, str):
+            return v.strip()
+        return v
 
 
 class ProjectResponseSchema(ProjectBase):

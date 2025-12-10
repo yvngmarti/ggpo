@@ -1,10 +1,17 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import Optional
 from datetime import datetime
 
 
 class PaymentStatusBase(BaseModel):
     name: str
+
+    @field_validator("name", mode="before")
+    @classmethod
+    def strip_whitespace(cls, v):
+        if isinstance(v, str):
+            return v.strip()
+        return v
 
 
 class CreatePaymentStatusSchema(PaymentStatusBase):
@@ -13,6 +20,13 @@ class CreatePaymentStatusSchema(PaymentStatusBase):
 
 class UpdatePaymentStatusSchema(BaseModel):
     name: Optional[str] = None
+
+    @field_validator("name", mode="before")
+    @classmethod
+    def strip_whitespace(cls, v):
+        if isinstance(v, str):
+            return v.strip()
+        return v
 
 
 class PaymentStatusResponseSchema(PaymentStatusBase):
