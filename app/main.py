@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter
+from app.api.routers import auth
 from app.api.routers import expense_statements
 from app.api.routers import payment_statements
 from app.api.routers import transaction_types
@@ -21,6 +22,7 @@ app = FastAPI(
 
 api_router = APIRouter(prefix=constants.API_PREFIX)
 
+api_router.include_router(auth.router)
 api_router.include_router(expense_statements.router)
 api_router.include_router(payment_statements.router)
 api_router.include_router(transaction_types.router)

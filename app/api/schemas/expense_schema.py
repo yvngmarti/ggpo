@@ -25,7 +25,6 @@ class ExpenseBase(BaseModel):
 class CreateExpenseSchema(ExpenseBase):
     project_id: int
     provider_id: int
-    created_by_id: int
 
 
 class UpdateExpenseSchema(BaseModel):
@@ -45,7 +44,6 @@ class UpdateExpenseSchema(BaseModel):
 
 
 class ReviewExpenseSchema(BaseModel):
-    reviewer_id: int
     action: str = Field(
         ...,
         pattern=f"^({constants.ACTION_APPROVE}|{constants.ACTION_REJECT})$",

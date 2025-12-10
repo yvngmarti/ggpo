@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.user_service import UserService
+from app.api.services import UserService
 from app.api.schemas import user_schema
 from app.api.helpers import APIResponse, get_user_service
 

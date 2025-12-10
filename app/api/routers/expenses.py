@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
-from app.api.services.expense_service import ExpenseService
+from app.api.services import ExpenseService
 from app.api.schemas import expense_schema
-from app.api.helpers import APIResponse, get_expense_service
+from app.api.helpers import APIResponse, get_expense_service, get_current_user
+from app.models import User
 
 router = APIRouter(prefix="/expenses", tags=["Expenses"])
 
@@ -32,8 +33,9 @@ def get_expense_by_id(
 def create_expense(
     create_schema: expense_schema.CreateExpenseSchema,
     service: ExpenseService = Depends(get_expense_service),
+    current_user: User = Depends(get_current_user),
 ):
-    success, message, expense = service.create_expense(create_schema)
+    success, message, expense = service.create_expense(create_schema, current_user)
 
     if not success:
         return APIResponse(status=False, message=message, data=None)
@@ -62,8 +64,11 @@ def review_expense(
     expense_id: int,
     review_schema: expense_schema.ReviewExpenseSchema,
     service: ExpenseService = Depends(get_expense_service),
+    current_user: User = Depends(get_current_user),
 ):
-    success, message, expense = service.review_expense(expense_id, review_schema)
+    success, message, expense = service.review_expense(
+        expense_id, review_schema, current_user
+    )
 
     if not success:
         return APIResponse(status=False, message=message, data=None)

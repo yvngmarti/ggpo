@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.project_service import ProjectService
+from app.api.services import ProjectService
 from app.api.schemas import project_schema
 from app.api.helpers import APIResponse, get_project_service
 

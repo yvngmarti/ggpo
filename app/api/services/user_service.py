@@ -3,7 +3,7 @@ from app.models import User
 from app.api.repositories.user_repository import UserRepository
 from app.api.repositories.role_repository import RoleRepository
 from app.api.schemas.user_schema import CreateUserSchema, UpdateUserSchema
-from app.utils.security import SecurityUtils
+from app.core.security import SecurityUtils
 
 
 class UserService:

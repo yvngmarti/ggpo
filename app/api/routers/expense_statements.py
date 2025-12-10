@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.expense_status_service import ExpenseStatusService
+from app.api.services import ExpenseStatusService
 from app.api.schemas import expense_status_schema
 from app.api.helpers import APIResponse, get_expense_status_service
 

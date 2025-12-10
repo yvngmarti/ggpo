@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.transaction_type_service import TransactionTypeService
+from app.api.services import TransactionTypeService
 from app.api.schemas import transaction_type_schema
 from app.api.helpers import APIResponse, get_transaction_type_service
 

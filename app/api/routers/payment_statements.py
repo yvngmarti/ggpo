@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.payment_status_service import PaymentStatusService
+from app.api.services import PaymentStatusService
 from app.api.schemas import payment_status_schema
 from app.api.helpers import APIResponse, get_payment_status_service
 

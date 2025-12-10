@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.provider_service import ProviderService
+from app.api.services import ProviderService
 from app.api.schemas import provider_schema
 from app.api.helpers import APIResponse, get_provider_service
 

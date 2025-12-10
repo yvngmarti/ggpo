@@ -10,6 +10,7 @@ from app.api.schemas.expense_schema import (
     UpdateExpenseSchema,
     ReviewExpenseSchema,
 )
+from app.models import User
 from app.utils.constants import constants
 
 
@@ -28,7 +29,7 @@ class ExpenseService:
     def get_expense_by_id(self, expense_id: int):
         return self.repository.get_by_id(self.db, expense_id)
 
-    def create_expense(self, create_schema: CreateExpenseSchema):
+    def create_expense(self, create_schema: CreateExpenseSchema, current_user: User):
         if not self.project_repository.get_by_id(self.db, create_schema.project_id):
             return False, "Project not found", None
         if not self.provider_repository.get_by_id(self.db, create_schema.provider_id):
@@ -53,7 +54,7 @@ class ExpenseService:
             evidence_url=create_schema.evidence_url,
             project_id=create_schema.project_id,
             provider_id=create_schema.provider_id,
-            created_by_id=create_schema.created_by_id,
+            created_by_id=current_user.id,
             status_id=initial_expense_status.id,
         )
         created_expense = self.repository.create(self.db, new_expense)
@@ -86,16 +87,18 @@ class ExpenseService:
         updated_expense = self.repository.update(self.db, existing_expense)
         return True, "Expense updated successfully", updated_expense
 
-    def review_expense(self, expense_id: int, review_schema: ReviewExpenseSchema):
+    def review_expense(
+        self, expense_id: int, review_schema: ReviewExpenseSchema, current_user: User
+    ):
         existing_expense = self.repository.get_by_id(self.db, expense_id)
         if not existing_expense:
             return False, "Expense not found", None
 
-        reviewer = self.user_repository.get_by_id(self.db, review_schema.reviewer_id)
-        if not reviewer:
-            return False, "Reviewer user not found", None
+        # reviewer = self.user_repository.get_by_id(self.db, review_schema.reviewer_id)
+        # if not reviewer:
+        #     return False, "Reviewer user not found", None
 
-        if reviewer.role.name != constants.ROLE_DIRECTOR:
+        if current_user.role.name != constants.ROLE_DIRECTOR:
             return False, "Only directors can review expenses", None
 
         if review_schema.action == constants.ACTION_APPROVE:
@@ -117,7 +120,7 @@ class ExpenseService:
             return False, "Invalid action", None
 
         existing_expense.status_id = new_status.id
-        existing_expense.reviewed_by_id = reviewer.id
+        existing_expense.reviewed_by_id = current_user.id
 
         updated_expense = self.repository.update(self.db, existing_expense)
         return True, f"Expense {review_schema.action} successfully", updated_expense

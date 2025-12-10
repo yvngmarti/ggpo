@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.api.services import (
+    AuthService,
     RoleService,
     TransactionTypeService,
     PaymentStatusService,
@@ -12,6 +13,10 @@ from app.api.services import (
     ExpenseService,
 )
 from fastapi import Depends
+
+
+def get_auth_service(db: Session = Depends(get_db)):
+    return AuthService(db)
 
 
 def get_role_service(db: Session = Depends(get_db)):

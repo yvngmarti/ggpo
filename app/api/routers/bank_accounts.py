@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.bank_account_service import BankAccountService
+from app.api.services import BankAccountService
 from app.api.schemas import bank_account_schema
 from app.api.helpers import APIResponse, get_bank_account_service
 

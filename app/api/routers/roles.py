@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.api.services.role_service import RoleService
+from app.api.services import RoleService
 from app.api.schemas import role_schema
 from app.api.helpers import APIResponse, get_role_service
 
