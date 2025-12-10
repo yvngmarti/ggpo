@@ -9,6 +9,7 @@ from app.api.services import (
     BankAccountService,
     ProviderService,
     UserService,
+    ExpenseService,
 )
 from fastapi import Depends
 
@@ -43,3 +44,7 @@ def get_provider_service(db: Session = Depends(get_db)):
 
 def get_user_service(db: Session = Depends(get_db)):
     return UserService(db)
+
+
+def get_expense_service(db: Session = Depends(get_db)):
+    return ExpenseService(db)

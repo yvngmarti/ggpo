@@ -37,3 +37,8 @@ class ExpenseStatusResponseSchema(ExpenseStatusBase):
 
     class Config:
         from_attributes = True
+
+
+class ExpenseSimpleResponseSchema(ExpenseStatusBase):
+    class Config:
+        from_attributes = True

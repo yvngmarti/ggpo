@@ -7,6 +7,7 @@ from app.api.routers import projects
 from app.api.routers import bank_accounts
 from app.api.routers import providers
 from app.api.routers import users
+from app.api.routers import expenses
 from .utils import constants
 
 # from src.core.middlewares import setup_middlewares
@@ -28,6 +29,7 @@ api_router.include_router(projects.router)
 api_router.include_router(bank_accounts.router)
 api_router.include_router(providers.router)
 api_router.include_router(users.router)
+api_router.include_router(expenses.router)
 
 app.include_router(api_router)
 

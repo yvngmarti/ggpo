@@ -96,3 +96,10 @@ class UserResponseSchema(UserBase):
 
     class Config:
         from_attributes = True
+
+
+class UserSimpleResponseSchema(UserBase):
+    role: RoleSimpleResponseSchema
+
+    class Config:
+        from_attributes = True

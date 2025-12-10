@@ -42,3 +42,8 @@ class ProjectResponseSchema(ProjectBase):
 
     class Config:
         from_attributes = True
+
+
+class ProjectSimpleResponseSchema(ProjectBase):
+    class Config:
+        from_attributes = True

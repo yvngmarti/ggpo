@@ -21,8 +21,8 @@ class User(Base, TimestampMixin):
     created_expenses = relationship(
         "Expense", back_populates="created_by", foreign_keys="Expense.created_by_id"
     )
-    approved_expenses = relationship(
-        "Expense", back_populates="approved_by", foreign_keys="Expense.approved_by_id"
+    reviewed_expenses = relationship(
+        "Expense", back_populates="reviewed_by", foreign_keys="Expense.reviewed_by_id"
     )
 
     created_payments = relationship(
@@ -72,15 +72,15 @@ class Expense(Base, TimestampMixin):
     __tablename__ = "expenses"
     id = Column(Integer, primary_key=True, index=True)
     description = Column(String)
-    total_amount = Column(Float)
-    invoice_date = Column(Date)
+    total_amount = Column(Float, nullable=False)
+    invoice_date = Column(Date, nullable=False)
     evidence_url = Column(String)
     rejection_reason = Column(Text)
 
     created_by_id = Column(
         Integer, ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
-    approved_by_id = Column(Integer, ForeignKey("users.id", ondelete="RESTRICT"))
+    reviewed_by_id = Column(Integer, ForeignKey("users.id", ondelete="RESTRICT"))
     project_id = Column(
         Integer, ForeignKey("projects.id", ondelete="RESTRICT"), nullable=False
     )
@@ -94,8 +94,8 @@ class Expense(Base, TimestampMixin):
     created_by = relationship(
         "User", back_populates="created_expenses", foreign_keys=[created_by_id]
     )
-    approved_by = relationship(
-        "User", back_populates="approved_expenses", foreign_keys=[approved_by_id]
+    reviewed_by = relationship(
+        "User", back_populates="reviewed_expenses", foreign_keys=[reviewed_by_id]
     )
     project = relationship("Project", back_populates="expenses")
     provider = relationship("Provider", back_populates="expenses")

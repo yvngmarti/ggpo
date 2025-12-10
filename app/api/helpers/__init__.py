@@ -8,6 +8,7 @@ from .dependencies import (
     get_bank_account_service,
     get_provider_service,
     get_user_service,
+    get_expense_service,
 )
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "get_bank_account_service",
     "get_provider_service",
     "get_user_service",
+    "get_expense_service",
 ]

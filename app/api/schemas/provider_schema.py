@@ -47,3 +47,8 @@ class ProviderResponseSchema(ProviderBase):
 
     class Config:
         from_attributes = True
+
+
+class ProviderSimpleResponseSchema(ProviderBase):
+    class Config:
+        from_attributes = True
