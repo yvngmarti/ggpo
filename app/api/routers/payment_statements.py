@@ -59,7 +59,7 @@ def get_payment_status_by_name(
     )
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_payment_status(
     create_schema: payment_status_schema.CreatePaymentStatusSchema,
     service: PaymentStatusService = Depends(get_payment_status_service),

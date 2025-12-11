@@ -34,7 +34,7 @@ def get_expense_by_id(
     return APIResponse(status=True, message="Expense retrieved successfully", data=data)
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_expense(
     create_schema: expense_schema.CreateExpenseSchema,
     service: ExpenseService = Depends(get_expense_service),

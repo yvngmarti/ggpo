@@ -42,7 +42,7 @@ def get_payment_by_id(
     return APIResponse(status=True, message="Payment retrieved successfully", data=data)
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_payment(
     create_schema: payment_schema.CreatePaymentSchema,
     service: PaymentService = Depends(get_payment_service),

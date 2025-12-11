@@ -35,7 +35,7 @@ def get_bank_account_by_id(
     )
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_bank_account(
     create_schema: bank_account_schema.CreateBankAccountSchema,
     service: BankAccountService = Depends(get_bank_account_service),

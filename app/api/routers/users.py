@@ -28,7 +28,7 @@ def get_user_by_id(
     return APIResponse(status=True, message="User retrieved successfully", data=data)
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_user(
     create_schema: user_schema.CreateUserSchema,
     service: UserService = Depends(get_user_service),

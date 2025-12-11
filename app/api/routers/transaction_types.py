@@ -63,7 +63,7 @@ def get_transaction_type_by_name(
     )
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_transaction_type(
     create_schema: transaction_type_schema.CreateTransactionTypeSchema,
     service: TransactionTypeService = Depends(get_transaction_type_service),

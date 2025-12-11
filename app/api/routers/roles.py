@@ -42,7 +42,7 @@ def get_role_by_name(
     return APIResponse(status=True, message="Role retrieved successfully", data=data)
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_role(
     create_schema: role_schema.CreateRoleSchema,
     service: RoleService = Depends(get_role_service),

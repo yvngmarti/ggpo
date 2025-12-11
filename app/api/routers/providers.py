@@ -48,7 +48,7 @@ def get_provider_by_rfc(
     )
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_provider(
     create_schema: provider_schema.CreateProviderSchema,
     service: ProviderService = Depends(get_provider_service),

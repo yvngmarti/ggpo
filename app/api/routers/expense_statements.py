@@ -59,7 +59,7 @@ def get_expense_status_by_name(
     )
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_expense_status(
     create_schema: expense_status_schema.CreateExpenseStatusSchema,
     service: ExpenseStatusService = Depends(get_expense_status_service),

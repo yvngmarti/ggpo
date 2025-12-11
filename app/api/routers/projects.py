@@ -42,7 +42,7 @@ def get_project_by_code(
     return APIResponse(status=True, message="Project retrieved successfully", data=data)
 
 
-@router.post("/", response_model=APIResponse)
+@router.post("", response_model=APIResponse)
 def create_project(
     create_schema: project_schema.CreateProjectSchema,
     service: ProjectService = Depends(get_project_service),

@@ -1,6 +1,6 @@
 from typing import Optional
 from datetime import date, datetime
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 from app.api.schemas.expense_schema import ExpenseResponseSchema
 from app.api.schemas.payment_status_schema import PaymentStatusSimpleResponseSchema
 from app.api.schemas.user_schema import UserSimpleResponseSchema
