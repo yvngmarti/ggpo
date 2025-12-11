@@ -1,6 +1,6 @@
-from pydantic import BaseModel, field_validator
 from typing import Optional
 from datetime import datetime
+from pydantic import BaseModel, field_validator
 
 
 class ExpenseStatusBase(BaseModel):
@@ -39,6 +39,6 @@ class ExpenseStatusResponseSchema(ExpenseStatusBase):
         from_attributes = True
 
 
-class ExpenseSimpleResponseSchema(ExpenseStatusBase):
+class ExpenseStatusSimpleResponseSchema(ExpenseStatusBase):
     class Config:
         from_attributes = True

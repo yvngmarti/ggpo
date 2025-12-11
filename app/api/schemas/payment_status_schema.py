@@ -1,6 +1,6 @@
-from pydantic import BaseModel, field_validator
 from typing import Optional
 from datetime import datetime
+from pydantic import BaseModel, field_validator
 
 
 class PaymentStatusBase(BaseModel):
@@ -35,5 +35,10 @@ class PaymentStatusResponseSchema(PaymentStatusBase):
     created_at: datetime = None
     updated_at: datetime = None
 
+    class Config:
+        from_attributes = True
+
+
+class PaymentStatusSimpleResponseSchema(PaymentStatusBase):
     class Config:
         from_attributes = True

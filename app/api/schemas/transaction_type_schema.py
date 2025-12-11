@@ -1,6 +1,6 @@
-from pydantic import BaseModel, field_validator
 from typing import Optional
 from datetime import datetime
+from pydantic import BaseModel, field_validator
 
 
 class TransactionTypeBase(BaseModel):
