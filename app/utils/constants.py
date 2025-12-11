@@ -1,7 +1,7 @@
 class Constants:
     # Configuración general del proyecto
     PROJECT_NAME: str = "API Gestión de Gastos y Pagos de Obras (GGPO)"
-    PROJECT_VERSION: str = "0.10.0"
+    PROJECT_VERSION: str = "0.12.0"
     API_PREFIX: str = "/api/v1"
 
     # Estados posibles de un gasto

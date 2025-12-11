@@ -13,6 +13,7 @@ from app.api.services import (
     UserService,
     ExpenseService,
     PaymentService,
+    BankTransactionService,
 )
 
 
@@ -58,3 +59,7 @@ def get_expense_service(db: Session = Depends(get_db)):
 
 def get_payment_service(db: Session = Depends(get_db)):
     return PaymentService(db)
+
+
+def get_bank_transaction_service(db: Session = Depends(get_db)):
+    return BankTransactionService(db)

@@ -10,6 +10,7 @@ from app.api.routers import providers
 from app.api.routers import users
 from app.api.routers import expenses
 from app.api.routers import payments
+from app.api.routers import bank_transactions
 from app.api.helpers import get_current_user
 from .utils import constants
 
@@ -38,6 +39,7 @@ protected_router.include_router(providers.router)
 protected_router.include_router(users.router)
 protected_router.include_router(expenses.router)
 protected_router.include_router(payments.router)
+protected_router.include_router(bank_transactions.router)
 
 app.include_router(public_router)
 app.include_router(protected_router)

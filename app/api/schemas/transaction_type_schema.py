@@ -31,9 +31,15 @@ class UpdateTransactionTypeSchema(BaseModel):
 
 class TransactionTypeResponseSchema(TransactionTypeBase):
     id: int
-    name: str
+
     created_at: datetime = None
     updated_at: datetime = None
+
+    class Config:
+        from_attributes = True
+
+
+class TransactionTypeSimpleResponseSchema(TransactionTypeBase):
 
     class Config:
         from_attributes = True

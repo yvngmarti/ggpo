@@ -11,6 +11,7 @@ from .dependencies import (
     get_user_service,
     get_expense_service,
     get_payment_service,
+    get_bank_transaction_service,
 )
 from .auth_dependencies import get_current_user, RoleChecker
 
@@ -29,4 +30,5 @@ __all__ = [
     "get_user_service",
     "get_expense_service",
     "get_payment_service",
+    "get_bank_transaction_service",
 ]

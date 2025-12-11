@@ -69,17 +69,3 @@ def update_project(
 
     data = project_schema.ProjectResponseSchema.model_validate(project)
     return APIResponse(status=True, message=message, data=data)
-
-
-# @router.delete("/{project_id}", response_model=APIResponse)
-# def delete_project(
-#     project_id: int,
-#     service: ProjectService = Depends(get_project_service),
-# ):
-#     success, message, project = service.delete_project(project_id)
-
-#     if not success:
-#         return APIResponse(status=False, message=message, data=None)
-
-#     data = project_schema.ProjectResponseSchema.model_validate(project)
-#     return APIResponse(status=True, message=message, data=data)

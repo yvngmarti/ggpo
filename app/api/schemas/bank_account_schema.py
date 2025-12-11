@@ -39,3 +39,9 @@ class BankAccountResponseSchema(BankAccountBase):
 
     class Config:
         from_attributes = True
+
+
+class BankAccountSimpleResponseSchema(BankAccountBase):
+
+    class Config:
+        from_attributes = True
