@@ -60,7 +60,7 @@ class ExpenseService:
         if not existing_expense:
             return False, "Expense not found", None
 
-        if existing_expense.status.name != constants.EXPENSE_STATUS_UNDER_REVIEW:
+        if existing_expense.status.name == constants.EXPENSE_STATUS_APPROVED:
             return False, "Cannot edit an expense that is already processed", None
 
         update_data = update_schema.model_dump(exclude_unset=True)
@@ -79,6 +79,11 @@ class ExpenseService:
         for field, value in update_data.items():
             setattr(existing_expense, field, value)
 
+        reset_status = self.expense_status_repository.get_by_name(
+            self.db, constants.EXPENSE_STATUS_UNDER_REVIEW
+        )
+        existing_expense.status_id = reset_status.id
+
         updated_expense = self.repository.update(self.db, existing_expense)
         return True, "Expense updated successfully", updated_expense
 
@@ -94,6 +99,7 @@ class ExpenseService:
                 self.db, constants.EXPENSE_STATUS_APPROVED
             )
             existing_expense.rejection_reason = None
+            action_past = constants.EXPENSE_STATUS_APPROVED.lower()
 
         elif review_schema.action == constants.EXPENSE_ACTION_REJECT:
             if not review_schema.rejection_reason:
@@ -103,6 +109,7 @@ class ExpenseService:
                 self.db, constants.EXPENSE_STATUS_REJECTED
             )
             existing_expense.rejection_reason = review_schema.rejection_reason
+            action_past = constants.EXPENSE_STATUS_REJECTED.lower()
 
         else:
             return False, "Invalid action", None
@@ -111,4 +118,4 @@ class ExpenseService:
         existing_expense.reviewed_by_id = current_user.id
 
         updated_expense = self.repository.update(self.db, existing_expense)
-        return True, f"Expense {review_schema.action} successfully", updated_expense
+        return True, f"Expense {action_past} successfully", updated_expense

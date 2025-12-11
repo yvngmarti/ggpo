@@ -107,7 +107,7 @@ class Expense(Base, TimestampMixin):
 class Payment(Base, TimestampMixin):
     __tablename__ = "payments"
     id = Column(Integer, primary_key=True, index=True)
-    amount = Column(Float)
+    amount = Column(Float, nullable=False)
     payment_date = Column(Date)
 
     expense_id = Column(
