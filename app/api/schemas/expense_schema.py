@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import date, datetime
 from pydantic import BaseModel, Field, field_validator
-from app.api.schemas.expense_status_schema import ExpenseSimpleResponseSchema
+from app.api.schemas.expense_status_schema import ExpenseStatusSimpleResponseSchema
 from app.api.schemas.project_schema import ProjectSimpleResponseSchema
 from app.api.schemas.provider_schema import ProviderSimpleResponseSchema
 from app.api.schemas.user_schema import UserSimpleResponseSchema
@@ -65,7 +65,7 @@ class ExpenseResponseSchema(ExpenseBase):
     created_at: datetime
     updated_at: datetime
 
-    status: ExpenseSimpleResponseSchema
+    status: ExpenseStatusSimpleResponseSchema
     project: ProjectSimpleResponseSchema
     provider: ProviderSimpleResponseSchema
     created_by: UserSimpleResponseSchema
@@ -73,3 +73,9 @@ class ExpenseResponseSchema(ExpenseBase):
 
     class Config:
         from_attributes = True
+
+
+# class ExpenseSimpleResponseSchema(ExpenseBase):
+
+#     class Config:
+#         from_attributes = True

@@ -13,6 +13,19 @@ class Constants:
     EXPENSE_ACTION_APPROVE: str = "APPROVE"
     EXPENSE_ACTION_REJECT: str = "REJECT"
 
+    # Estados de pago
+    PAYMENT_STATUS_PENDING: str = "PENDIENTE"
+    PAYMENT_STATUS_PAID: str = "PAGADO"
+    PAYMENT_STATUS_CANCELED: str = "CANCELADO"
+
+    # Tipos de transacciones
+    TRANSACTION_TYPE_EXPENSES = "EXPENSES"
+    TRANSACTION_TYPE_INCOME = "INCOME"
+
+    # Acciones de pago
+    PAYMENT_ACTION_PAY: str = "PAY"
+    PAYMENT_ACTION_CANCEL: str = "CANCEL"
+
     # Roles de usuario en el sistema
     ROLE_DIRECTOR: str = "DIRECTOR"
     ROLE_ENGINEER: str = "EMPLOYEE"

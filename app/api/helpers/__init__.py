@@ -10,6 +10,7 @@ from .dependencies import (
     get_provider_service,
     get_user_service,
     get_expense_service,
+    get_payment_service,
 )
 from .auth_dependencies import get_current_user, RoleChecker
 
@@ -27,4 +28,5 @@ __all__ = [
     "get_provider_service",
     "get_user_service",
     "get_expense_service",
+    "get_payment_service",
 ]
