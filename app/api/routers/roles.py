@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_role_service
 router = APIRouter(prefix="/roles", tags=["Roles"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_roles(service: RoleService = Depends(get_role_service)):
     roles = service.get_all_roles()
     data = [role_schema.RoleResponseSchema.model_validate(r) for r in roles]

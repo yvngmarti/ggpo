@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_user_service
 router = APIRouter(prefix="/users", tags=["Users"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_users(service: UserService = Depends(get_user_service)):
     users = service.get_all_users()
     data = [user_schema.UserResponseSchema.model_validate(u) for u in users]

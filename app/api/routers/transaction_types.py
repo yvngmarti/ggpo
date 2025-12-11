@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_transaction_type_service
 router = APIRouter(prefix="/transaction-types", tags=["Transaction Types"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_transaction_types(
     service: TransactionTypeService = Depends(get_transaction_type_service),
 ):

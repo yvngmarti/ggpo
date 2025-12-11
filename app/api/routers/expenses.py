@@ -12,7 +12,7 @@ from app.models import User
 router = APIRouter(prefix="/expenses", tags=["Expenses"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_expenses(service: ExpenseService = Depends(get_expense_service)):
     expenses = service.get_all_expenses()
     data = [expense_schema.ExpenseResponseSchema.model_validate(e) for e in expenses]

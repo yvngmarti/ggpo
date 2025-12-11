@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_payment_status_service
 router = APIRouter(prefix="/payment-status", tags=["Payment Status"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_payment_statements(
     service: PaymentStatusService = Depends(get_payment_status_service),
 ):

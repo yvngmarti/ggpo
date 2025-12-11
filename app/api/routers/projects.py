@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_project_service
 router = APIRouter(prefix="/projects", tags=["Projects"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_projects(service: ProjectService = Depends(get_project_service)):
     projects = service.get_all_projects()
     data = [project_schema.ProjectResponseSchema.model_validate(p) for p in projects]

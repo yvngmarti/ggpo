@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_expense_status_service
 router = APIRouter(prefix="/expense-status", tags=["Expense Status"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_expense_statements(
     service: ExpenseStatusService = Depends(get_expense_status_service),
 ):

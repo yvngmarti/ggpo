@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_provider_service
 router = APIRouter(prefix="/providers", tags=["Providers"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_providers(
     service: ProviderService = Depends(get_provider_service),
 ):

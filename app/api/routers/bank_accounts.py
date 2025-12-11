@@ -6,7 +6,7 @@ from app.api.helpers import APIResponse, get_bank_account_service
 router = APIRouter(prefix="/bank-accounts", tags=["Bank Accounts"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_bank_accounts(
     service: BankAccountService = Depends(get_bank_account_service),
 ):
