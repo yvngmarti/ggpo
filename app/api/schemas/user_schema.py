@@ -27,10 +27,10 @@ class UserBase(BaseModel):
 
 
 class CreateUserSchema(UserBase):
-    role_id: int
     password: str = Field(
         ..., min_length=12, description="Password must be at least 12 characters"
     )
+    role_id: int
 
     @field_validator("password")
     @classmethod
