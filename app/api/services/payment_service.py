@@ -42,7 +42,7 @@ class PaymentService:
         if not initial_payment_status:
             return (
                 False,
-                f"Initial status {constants.PAYMENT_STATUS_PENDING} not found",
+                f"Initial status {constants.PAYMENT_STATUS_PENDING.lower()} not found",
                 None,
             )
 

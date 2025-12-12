@@ -3,7 +3,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field, field_validator
 from app.api.schemas.bank_account_schema import BankAccountSimpleResponseSchema
 from app.api.schemas.transaction_type_schema import TransactionTypeSimpleResponseSchema
-from app.api.schemas.payment_schema import PaymentResponseSchema
+from app.api.schemas.payment_schema import PaymentSimpleResponseSchema
 
 
 class BankTransactionBase(BaseModel):
@@ -25,10 +25,11 @@ class CreateDepositSchema(BankTransactionBase):
 class BankTransactionResponseSchema(BankTransactionBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
     bank_account: BankAccountSimpleResponseSchema
     transaction_type: TransactionTypeSimpleResponseSchema
-    payment: Optional[PaymentResponseSchema] = None
+    payment: Optional[PaymentSimpleResponseSchema] = None
 
     class Config:
         from_attributes = True

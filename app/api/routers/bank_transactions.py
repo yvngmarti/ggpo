@@ -12,7 +12,7 @@ from app.models import User
 router = APIRouter(prefix="/bank-transactions", tags=["Bank Transactions"])
 
 
-@router.get("/", response_model=APIResponse)
+@router.get("", response_model=APIResponse)
 def get_transactions(
     service: BankTransactionService = Depends(get_bank_transaction_service),
     current_user: User = Depends(

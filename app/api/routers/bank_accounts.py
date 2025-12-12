@@ -1,7 +1,14 @@
 from fastapi import APIRouter, Depends
 from app.api.services import BankAccountService
 from app.api.schemas import bank_account_schema
-from app.api.helpers import APIResponse, get_bank_account_service
+from app.api.helpers import (
+    APIResponse,
+    get_bank_account_service,
+    RoleChecker,
+)
+from app.utils.constants import constants
+from app.models import User
+
 
 router = APIRouter(prefix="/bank-accounts", tags=["Bank Accounts"])
 
@@ -9,6 +16,9 @@ router = APIRouter(prefix="/bank-accounts", tags=["Bank Accounts"])
 @router.get("", response_model=APIResponse)
 def get_bank_accounts(
     service: BankAccountService = Depends(get_bank_account_service),
+    current_user: User = Depends(
+        RoleChecker([constants.ROLE_DIRECTOR, constants.ROLE_TREASURER])
+    ),
 ):
     accounts = service.get_all_bank_accounts()
     data = [

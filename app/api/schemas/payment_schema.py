@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import date, datetime
 from pydantic import BaseModel, Field
-from app.api.schemas.expense_schema import ExpenseResponseSchema
+from app.api.schemas.expense_schema import ExpenseSimpleResponseSchema
 from app.api.schemas.payment_status_schema import PaymentStatusSimpleResponseSchema
 from app.api.schemas.user_schema import UserSimpleResponseSchema
 from app.utils.constants import constants
@@ -32,9 +32,22 @@ class PaymentResponseSchema(PaymentBase):
     updated_at: datetime
 
     status: PaymentStatusSimpleResponseSchema
-    expense: ExpenseResponseSchema
     created_by: UserSimpleResponseSchema
     processed_by: Optional[UserSimpleResponseSchema] = None
+    expense: ExpenseSimpleResponseSchema
+
+    class Config:
+        from_attributes = True
+
+
+class PaymentSimpleResponseSchema(PaymentBase):
+    amount: float
+    payment_date: Optional[date] = None
+
+    status: PaymentStatusSimpleResponseSchema
+    created_by: UserSimpleResponseSchema
+    processed_by: Optional[UserSimpleResponseSchema] = None
+    expense: ExpenseSimpleResponseSchema
 
     class Config:
         from_attributes = True

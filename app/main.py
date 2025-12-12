@@ -13,6 +13,7 @@ from app.api.routers import payments
 from app.api.routers import bank_transactions
 from app.api.helpers import get_current_user
 from .utils import constants
+from app.core.middleware import setup_cors
 
 # from src.core.middlewares import setup_middlewares
 
@@ -21,7 +22,7 @@ app = FastAPI(
     version=constants.PROJECT_VERSION,
 )
 
-# setup_middlewares(app)
+setup_cors(app)
 
 public_router = APIRouter(prefix=constants.API_PREFIX)
 public_router.include_router(auth.router)

@@ -9,11 +9,18 @@ class BankAccountBase(BaseModel):
         default=0.0, ge=0, description="Balance must be greater than or equal to 0"
     )
 
-    @field_validator("name", "account_number", mode="before")
+    @field_validator("name", mode="before")
     @classmethod
     def strip_whitespace(cls, v):
         if isinstance(v, str):
             return v.strip()
+        return v
+
+    @field_validator("account_number", mode="before")
+    @classmethod
+    def clean_account_number(cls, v):
+        if isinstance(v, str):
+            return v.strip().replace(" ", "")
         return v
 
 

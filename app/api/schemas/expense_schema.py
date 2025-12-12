@@ -75,7 +75,12 @@ class ExpenseResponseSchema(ExpenseBase):
         from_attributes = True
 
 
-# class ExpenseSimpleResponseSchema(ExpenseBase):
+class ExpenseSimpleResponseSchema(ExpenseBase):
+    status: ExpenseStatusSimpleResponseSchema
+    project: ProjectSimpleResponseSchema
+    provider: ProviderSimpleResponseSchema
+    created_by: UserSimpleResponseSchema
+    reviewed_by: Optional[UserSimpleResponseSchema] = None
 
-#     class Config:
-#         from_attributes = True
+    class Config:
+        from_attributes = True

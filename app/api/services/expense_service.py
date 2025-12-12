@@ -38,7 +38,7 @@ class ExpenseService:
         if not initial_expense_status:
             return (
                 False,
-                f"Initial status {constants.EXPENSE_STATUS_UNDER_REVIEW} not found",
+                f"Initial status {constants.EXPENSE_STATUS_UNDER_REVIEW.lower()} not found",
                 None,
             )
 

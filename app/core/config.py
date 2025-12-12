@@ -9,7 +9,9 @@ class Settings(BaseSettings):
     DB_NAME: str = Field(..., min_length=1)
     DB_HOST: str = Field(..., min_length=1)
     DB_PORT: str = Field(..., min_length=1)
-    # CORS_ORIGINS: list[str] = Field(default=["http://localhost:5173"])
+
+    CORS_ORIGINS: list[str] = Field(default=["http://localhost:5173"])
+
     SECRET_KEY: str = Field(...)
     ALGORITHM: str = Field(...)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30)
