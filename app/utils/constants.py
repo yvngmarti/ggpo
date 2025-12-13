@@ -8,6 +8,7 @@ class Constants:
     EXPENSE_STATUS_UNDER_REVIEW: str = "UNDER REVIEW"
     EXPENSE_STATUS_APPROVED: str = "APPROVED"
     EXPENSE_STATUS_REJECTED: str = "REJECTED"
+    EXPENSE_STATUS_PROCESSED: str = "PROCESSED"
 
     # Acciones que se pueden realizar sobre un gasto
     EXPENSE_ACTION_APPROVE: str = "APPROVE"

@@ -20,4 +20,5 @@ EXPENSE_STATUS = [
     "UNDER REVIEW",
     "APPROVED",
     "REJECTED",
+    "PROCESSED",
 ]

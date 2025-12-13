@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.models import Payment, User, BankTransaction
 from app.api.repositories.payment_repository import PaymentRepository
 from app.api.repositories.expense_repository import ExpenseRepository
+from app.api.repositories.expense_status_repository import ExpenseStatusRepository
 from app.api.repositories.payment_status_repository import PaymentStatusRepository
 from app.api.repositories.bank_account_repository import BankAccountRepository
 from app.api.repositories.transaction_type_repository import TransactionTypeRepository
@@ -15,6 +16,7 @@ class PaymentService:
         self.db = db
         self.repository = PaymentRepository()
         self.expense_repository = ExpenseRepository()
+        self.expense_status_repository = ExpenseStatusRepository()
         self.payment_status_repository = PaymentStatusRepository()
         self.bank_account_repository = BankAccountRepository()
         self.transaction_type_repository = TransactionTypeRepository()
@@ -46,6 +48,12 @@ class PaymentService:
                 None,
             )
 
+        expense_processed_status = self.expense_status_repository.get_by_name(
+            self.db, constants.EXPENSE_STATUS_PROCESSED
+        )
+        expense.status_id = expense_processed_status.id
+        self.expense_repository.update(self.db, expense)
+
         new_payment = Payment(
             amount=expense.total_amount,
             payment_date=None,
@@ -53,6 +61,7 @@ class PaymentService:
             status_id=initial_payment_status.id,
             created_by_id=current_user.id,
         )
+
         created_payment = self.repository.create(self.db, new_payment)
         return True, "Payment order generated successfully", created_payment
 
