@@ -5,7 +5,7 @@ from app.models import Expense
 class ExpenseRepository:
     @staticmethod
     def get_all(db: Session):
-        return db.query(Expense).all()
+        return db.query(Expense).order_by(Expense.updated_at.desc()).all()
 
     @staticmethod
     def get_by_id(db: Session, expense_id: int):

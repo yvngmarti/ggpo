@@ -5,7 +5,7 @@ from app.models import BankAccount
 class BankAccountRepository:
     @staticmethod
     def get_all(db: Session):
-        return db.query(BankAccount).all()
+        return db.query(BankAccount).order_by(BankAccount.id).all()
 
     @staticmethod
     def get_by_id(db: Session, account_id: int):

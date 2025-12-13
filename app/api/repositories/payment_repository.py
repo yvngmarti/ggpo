@@ -5,7 +5,7 @@ from app.models import Payment
 class PaymentRepository:
     @staticmethod
     def get_all(db: Session):
-        return db.query(Payment).all()
+        return db.query(Payment).order_by(Payment.updated_at.desc()).all()
 
     @staticmethod
     def get_by_id(db: Session, payment_id: int):
