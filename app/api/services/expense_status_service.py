@@ -64,4 +64,4 @@ class ExpenseStatusService:
         deleted_expense_status = self.repository.delete(
             self.db, existing_expense_status
         )
-        return True, "Expensse status deleted successfully", deleted_expense_status
+        return True, "Expense status deleted successfully", deleted_expense_status

@@ -12,10 +12,8 @@ from app.api.routers import expenses
 from app.api.routers import payments
 from app.api.routers import bank_transactions
 from app.api.helpers import get_current_user
-from .utils import constants
 from app.core.middleware import setup_cors
-
-# from src.core.middlewares import setup_middlewares
+from .utils import constants
 
 app = FastAPI(
     title=constants.PROJECT_NAME,
