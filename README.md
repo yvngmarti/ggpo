@@ -19,6 +19,19 @@ GGPO es una solución backend completa que permite:
 - **Gestión de Proveedores**: Registro y administración de proveedores
 - **Reportes**: Estados de gastos y pagos con información agregada
 
+## 🏛️ Arquitectura del Sistema
+
+El sistema sigue una arquitectura de capas (Clean Architecture) y un modelo relacional robusto.
+
+### Diagrama de Flujo (Lógica de Negocio)
+![Diagrama de Flujo](diagrams/flow_diagram.svg)
+
+### Diagrama de Base de Datos
+![Diagrama BD](diagrams/database_diagram_3nf.svg)
+
+### Caso de Uso General
+![Caso de Uso](diagrams/general_use_case.svg)
+
 ## 🛠️ Stack Tecnológico
 
 ### Backend
