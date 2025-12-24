@@ -23,7 +23,7 @@ GGPO es una solución backend completa que permite:
 
 El sistema sigue una arquitectura de capas (Clean Architecture) y un modelo relacional robusto.
 
-### Diagrama de Flujo (Lógica de Negocio)
+### Diagrama de Flujo
 ![Diagrama de Flujo](diagrams/flow_diagram.svg)
 
 ### Diagrama de Base de Datos
